@@ -25,6 +25,19 @@ execute:
 
 # 空間統計
 
+## 分析步驟
+
+首先做資料前處理，特別是在經緯度這類與地理位置有關的變數，接著做空間分析，使用陽性容器和容器指數兩種變數
+
+做分析。我們會使用density plot和相對風險圖來看哪邊風險高，接著依序做**點格局識別**、**空間自相關(格數據分析)**，
+
+最後做**空間滯後模型**。
+
+
+
+
+
+
 ## library
 
 載入需要使用的package。
@@ -32,6 +45,42 @@ execute:
 ```{r library}
 rm(list = ls())
 # ===== 1. 載入必要的套件 =====
+if (!requireNamespace("Hmisc", quietly = TRUE)) {
+  install.packages("Hmisc")
+}
+if (!requireNamespace("DataExplorer", quietly = TRUE)) {
+  install.packages("DataExplorer")
+}
+if (!requireNamespace("sp", quietly = TRUE)) {
+  install.packages("sp")
+}
+if (!requireNamespace("sf", quietly = TRUE)) {
+  install.packages("sf")
+}
+if (!requireNamespace("spacetime", quietly = TRUE)) {
+  install.packages("spacetime")
+}
+if (!requireNamespace("gstat", quietly = TRUE)) {
+  install.packages("gstat")
+}
+if (!requireNamespace("dplyr", quietly = TRUE)) {
+  install.packages("dplyr")
+}
+if (!requireNamespace("lubridate", quietly = TRUE)) {
+  install.packages("lubridate")
+}
+if (!requireNamespace("spdep", quietly = TRUE)) {
+  install.packages("spdep")
+}
+if (!requireNamespace("ggplot2", quietly = TRUE)) {
+  install.packages("ggplot2")
+}
+if (!requireNamespace("RColorBrewer", quietly = TRUE)) {
+  install.packages("RColorBrewer")
+}
+if (!requireNamespace("showtext", quietly = TRUE)) {
+  install.packages("showtext")
+}
 library(Hmisc)
 library(DataExplorer)
 library(sp)
@@ -226,6 +275,10 @@ yearly_data_list <- list(
 library(sf)
 library(dplyr)
 library(ggplot2)
+if (!requireNamespace("patchwork", quietly = TRUE)) {
+  install.packages("patchwork")
+}
+
 library(patchwork)
 
 # 讀取行政區邊界資料
@@ -677,6 +730,9 @@ Ripley’s K 函數提供了一個完整的尺度範圍的分析，比單一距�
 
 ```{r k_func}
 # ===== 載入必要套件 =====
+if (!requireNamespace("RANN", quietly = TRUE)) {
+  install.packages("RANN")
+}
 library(dplyr)
 library(sf)
 library(RANN)
